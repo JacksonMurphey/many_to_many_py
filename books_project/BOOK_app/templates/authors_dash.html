@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title%}Authors Dashboard{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>New Author</h2>
+            <form action="/authors/create" method="POST" class="m-1">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" class="form-control">
+                </div>
+                <input type="submit" name="" id="" value="Create" class="btn btn-success m-1">
+                {% with messages = get_flashed_messages() %}
+                <!-- declare a variable called messages -->
+                {% if messages %}
+                <!-- check if there are any messages -->
+                {% for message in messages %}
+                <!-- loop through the messages -->
+                <p>{{message}}</p> <!-- display each message in a paragraph tag -->
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </form>
+
+        </div>
+        <div class="col">
+
+            <h2>All Authors</h2>
+            <ul class="list-group">
+                {% for author in authors %}
+                <li class="list-group-item"><a href="/authors/{{author.id}}">{{author.name}}</a></li>
+                {% endfor %}
+            </ul>
+            <a href="/books" class="btn btn-primary m-1">Add Book</a>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

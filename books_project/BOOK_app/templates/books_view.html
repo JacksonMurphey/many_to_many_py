@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title%}Author's Books{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Title: {{book.title}}</h2>
+            <h6>Favorited by:</h6>
+            {% if book.authors %}
+            <ul class="list-group">
+                {% for author in book.authors %}
+                <li class="list-group-item">{{author.name}}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <ul class="list-group">
+                <li class="list-group-item">No Favorited Authors</li>
+            </ul>
+            {% endif %}
+            <a href="/authors" class="btn btn-primary m-1">Home</a>
+        </div>
+        <div class="col">
+            <h2>Add to Book's Favorites</h2>
+            <form action="/books/{{book.id}}/addfav" method="POST">
+                <div class="form-group">
+                    <label for="author_id">Authors:</label>
+                    <select name="author_id" class="form-control">
+                        {% for author in authors %}
+                        <option value="{{author.id}}">{{author.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <input type="submit" name="" id="" value="Add" class="btn btn-success m-1">
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
